@@ -12,7 +12,7 @@ const MenuHeader = ({ }) => {
     return (
         <div>
             <Row>
-                <Col className="text-center"><img className='logo' src={`/images/logo.png`}></img></Col>
+                <Col className="text-center"><img className='logo' src={`images/logo.png`}></img></Col>
             </Row>
             <Row>
                 <Col className="text-center cursive">Delicious Japanese food!</Col>
