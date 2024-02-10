@@ -12,7 +12,7 @@ const MenuItem = ({ title, imageName, description, price }) => {
     return (
         <div>
             <Row className='menu-row'>
-                <Col className='text-center'><img className='menu-img' src={`/images/${imageName}`}></img></Col>
+                <Col className='text-center'><img className='menu-img' src={`images/${imageName}`}></img></Col>
                 <Col>
                     <Row>
                         <Col className='item'>{title}</Col>
