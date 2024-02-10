@@ -1,7 +1,10 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
-
-// import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
+import MenuHeader from './components/MenuHeader';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import 'bootstrap/dist/css/bootstrap.min.css';  
 
 // Menu data. An array of objects where each object represents a menu item. Each menu item has an id, title, description, image name, and price.
 // You can use the image name to get the image from the images folder.
@@ -78,17 +81,33 @@ const menuItems = [
   }
 ];
 
-
 function App() {
+  const rows = [];
+  for(let i = 0; i < menuItems.length; i++) {
+    rows.push(<MenuItem
+      title={menuItems[i].title}
+      imageName={menuItems[i].imageName}
+      description={menuItems[i].description}
+      price={menuItems[i].price} />);
+  }
+
   return (
     <div>
-      <h1>Menu</h1>
       <div className="menu">
-        {/* Display menu items dynamicaly here by iterating over the provided menuItems */}
-        <MenuItem title={menuItems[0].title} /> {/* Example for how to use a component */}
+        <Container>
+          <MenuHeader />
+          {
+            rows
+          }
+        </Container>
       </div>
     </div>
   );
 }
 
 export default App;
+
+// https://www.geeksforgeeks.org/how-to-use-bootstrap-with-react/
+// https://stackoverflow.com/questions/62720569/how-do-i-center-align-the-contents-of-a-container-component-in-react-bootstrap
+// https://stackoverflow.com/questions/22876978/loop-inside-react-jsx
+// https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/8ad32a63508487.5ab2c595edb30.jpg
