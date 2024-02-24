@@ -16,14 +16,32 @@
 }
 
 .button {
+  border: none;
+  border-radius: 15px;
+  text-align: center;
   background-color: green;
+  color: white;
+}
+
+.quantity-button {
+  /* background-color: green;
   border: none;
   color: white;
   border-radius: 15px;
   font-size: 13px;
   padding: 3px 12px 4px 12px;
   text-align: center;
-  box-shadow: 3px 3px #e9e9e9;
+  box-shadow: 3px 3px #e9e9e9; */
+    height: 20px;
+    line-height: 3px;
+    width: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50%;
+    background-color: green;
+    color: white;
+    padding-bottom: 4px;
 }
 
 .description {

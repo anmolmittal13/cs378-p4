@@ -1,10 +1,12 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
 import MenuHeader from './components/MenuHeader';
+import OrderPopUp from './components/OrderPopUp'
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import 'bootstrap/dist/css/bootstrap.min.css';  
+import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
 
 // Menu data. An array of objects where each object represents a menu item. Each menu item has an id, title, description, image name, and price.
 // You can use the image name to get the image from the images folder.
@@ -82,23 +84,68 @@ const menuItems = [
 ];
 
 function App() {
-  const rows = [];
-  for(let i = 0; i < menuItems.length; i++) {
-    rows.push(<MenuItem
-      title={menuItems[i].title}
-      imageName={menuItems[i].imageName}
-      description={menuItems[i].description}
-      price={menuItems[i].price} />);
+  let quantities = new Array(menuItems.length).fill(0);
+
+  const [subtotal, setSubtotal] = useState(0);
+  const [quantity, setQuantity] = useState(quantities);
+
+  const updateSubtotal = (price) => {
+    setSubtotal(Math.max(subtotal + price, 0));
   }
+
+  const updateQuantity = (index, q) => {
+    let newArr = [...quantity];
+    newArr[index] = q;
+    setQuantity(newArr); 
+  }
+
+  let rows = [];
+  let counter = 0;
+
+  const createAll = () => {
+    rows = [];
+    for(let i = 0; i < menuItems.length; i++) {
+      rows.push(<MenuItem
+        key={counter}
+        title={menuItems[i].title}
+        imageName={menuItems[i].imageName}
+        description={menuItems[i].description}
+        price={menuItems[i].price}
+        updateQuantity={updateSubtotal} 
+        updateArray={updateQuantity}
+        index={i}
+        currentAmount={quantity[i]}
+        />);
+        counter++;
+    }
+  }
+
+  const clearAll = () => {
+    setSubtotal(0);
+    setQuantity(quantities);
+  }
+
+  createAll()
 
   return (
     <div>
       <div className="menu">
         <Container>
           <MenuHeader />
-          {
-            rows
-          }
+          {rows}
+          <Row>
+            <Col className='text-center'>
+              Subtotal: ${subtotal.toFixed(2)}
+            </Col>
+            <Col className='text-center'>
+              <OrderPopUp 
+              quantities={quantity}
+              menuItems={menuItems} ></OrderPopUp>
+            </Col>
+            <Col className='text-center'>
+              <button className='button' onClick={clearAll}>Clear all</button>
+            </Col>
+          </Row>
         </Container>
       </div>
     </div>
@@ -106,8 +153,3 @@ function App() {
 }
 
 export default App;
-
-// https://www.geeksforgeeks.org/how-to-use-bootstrap-with-react/
-// https://stackoverflow.com/questions/62720569/how-do-i-center-align-the-contents-of-a-container-component-in-react-bootstrap
-// https://stackoverflow.com/questions/22876978/loop-inside-react-jsx
-// https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/8ad32a63508487.5ab2c595edb30.jpg
