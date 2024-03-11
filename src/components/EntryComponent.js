@@ -32,7 +32,7 @@ function EntryComponent({ entryName }) {
                 (isEmptyName) ? (
                     <div>
                         <Row className='margin-row'>
-                            Enter an input to get started
+                            Enter an input above to get started!
                         </Row>
                     </div>
                 ) : 

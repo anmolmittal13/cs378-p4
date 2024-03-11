@@ -33,7 +33,7 @@ function App() {
     },
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState('treasure');
+  const [selectedCategory, setSelectedCategory] = useState('materials');
   const [selectedEntry, setSelectedEntry] = useState('');
 
   const clickCategory = (category) => {
